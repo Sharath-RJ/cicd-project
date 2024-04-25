@@ -39,14 +39,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Deployment steps for each service can be added here
-      # Example:
-      # - name: Deploy user service
-      #   working-directory: ./cicd-project/user
-      #   run: |
-      #     npm run deploy
+    
+      - name: Deploy user service
+        working-directory: ./cicd-project/user
+        run: |
+          npm run deploy
 
-      # - name: Deploy product service
-      #   working-directory: ./cicd-project/product
-      #   run: |
-      #     npm run deploy
+      - name: Deploy product service
+        working-directory: ./cicd-project/product
+        run: |
+          npm run deploy

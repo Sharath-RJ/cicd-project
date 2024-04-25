@@ -18,13 +18,12 @@ jobs:
         with:
           node-version: '20'
 
-      # Install dependencies and run tests for user service
       - name: Install dependencies and run tests for user service
         working-directory: ../cicd-project/users
         run: |
           npm install
           node ./users/src/index.js
-                # Install dependencies and run tests for product service
+
       - name: Install dependencies and run tests for product service
         working-directory: ../cicd-project/product
         run: |

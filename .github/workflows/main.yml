@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Run JavaScript Code
 
 on:
   push:
@@ -6,12 +6,10 @@ on:
       - main
 
 jobs:
-  build:
+  run-code:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -19,24 +17,17 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies for user service
-        working-directory: ./users
-        run: npm install
+        working-directory: ./users  # Navigate to users directory (adjust for product)
+        run: npm install || exit 1  # Add error handling (optional)
 
-      - name: Install dependencies for product service
-        working-directory: ./product
-        run: npm install
+      - name: Run user service (Example)
+        working-directory: ./users/src  # Navigate to users/src directory (adjust if needed)
+        run: node index.js  # Replace with your actual entry point script
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Install dependencies (Repeat for product service if needed)
+        working-directory: ./product  # Optional, repeat for product service
+        run: npm install || exit 1  # Add error handling (optional)
 
-      - name: Start user service
-        working-directory: ./users/src
-        run: node index.js &
-
-      - name: Start product service
-        working-directory: ./product/src
-        run: node index.js &
+      - name: Run product service (Example)
+        working-directory: ./product/src  # Optional, repeat for product service
+        run: node index.js  # Replace with your actual entry point script

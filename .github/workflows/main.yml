@@ -33,10 +33,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy user service
-        working-directory: ./cicd-project/users
-        run: npm run deploy
+      - name: Start user service
+        working-directory: ./cicd-project/users/src
+        run: node index.js &
 
-      - name: Deploy product service
-        working-directory: ./cicd-project/product
-        run: npm run deploy
+      - name: Start product service
+        working-directory: ./cicd-project/product/src
+        run: node index.js &

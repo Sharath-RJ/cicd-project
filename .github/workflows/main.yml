@@ -19,11 +19,11 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies for user service
-        working-directory: ./cicd-project/users
+        working-directory: ./users
         run: npm install
 
       - name: Install dependencies for product service
-        working-directory: ./cicd-project/product
+        working-directory: ./product
         run: npm install
 
   deploy:
@@ -34,9 +34,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Start user service
-        working-directory: ./cicd-project/users/src
+        working-directory: ./users/src
         run: node index.js &
 
       - name: Start product service
-        working-directory: ./cicd-project/product/src
+        working-directory: ./product/src
         run: node index.js &

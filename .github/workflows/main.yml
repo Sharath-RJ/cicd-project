@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -17,11 +18,19 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+      # Install dependencies and run tests for user service
+      - name: Install dependencies and run tests for user service
+        working-directory: ./cicd-project/user
+        run: |
+          npm install
+          npm test
 
-      - name: Run tests
-        run: npm test
+      # Install dependencies and run tests for product service
+      - name: Install dependencies and run tests for product service
+        working-directory: ./cicd-project/product
+        run: |
+          npm install
+          npm test
 
   deploy:
     needs: build
@@ -30,15 +39,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
+      # Deployment steps for each service can be added here
+      # Example:
+      # - name: Deploy user service
+      #   working-directory: ./cicd-project/user
+      #   run: |
+      #     npm run deploy
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy to production
-        run: |
-          # Add your deployment commands here
-          # Example: npm run deploy
+      # - name: Deploy product service
+      #   working-directory: ./cicd-project/product
+      #   run: |
+      #     npm run deploy

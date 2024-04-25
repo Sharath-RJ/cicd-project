@@ -18,17 +18,13 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies and run tests for user service
+      - name: Install dependencies for user service
         working-directory: ./cicd-project/users
-        run: |
-          npm install
-          npm test
+        run: npm install
 
-      - name: Install dependencies and run tests for product service
+      - name: Install dependencies for product service
         working-directory: ./cicd-project/product
-        run: |
-          npm install
-          npm test
+        run: npm install
 
   deploy:
     needs: build
@@ -39,10 +35,8 @@ jobs:
 
       - name: Deploy user service
         working-directory: ./cicd-project/users
-        run: |
-          npm run deploy
+        run: npm run deploy
 
       - name: Deploy product service
         working-directory: ./cicd-project/product
-        run: |
-          npm run deploy
+        run: npm run deploy

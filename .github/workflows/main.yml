@@ -20,7 +20,7 @@ jobs:
 
       # Install dependencies and run tests for user service
       - name: Install dependencies and run tests for user service
-        working-directory: ./cicd-project/user
+        working-directory: ./cicd-project/users
         run: |
           npm install
           npm test

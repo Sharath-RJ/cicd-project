@@ -16,20 +16,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: '14'
 
       - name: Install dependencies and run tests for user service
-        working-directory: ../cicd-project/users
+        working-directory: ./cicd-project/users
         run: |
           npm install
-          node ./users/src/index.js
+          npm test
 
       - name: Install dependencies and run tests for product service
-        working-directory: ../cicd-project/product
+        working-directory: ./cicd-project/product
         run: |
           npm install
-          node ./product/src/index.js
-
+          npm test
 
   deploy:
     needs: build
@@ -38,9 +37,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-    
       - name: Deploy user service
-        working-directory: ./cicd-project/user
+        working-directory: ./cicd-project/users
         run: |
           npm run deploy
 

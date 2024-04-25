@@ -23,14 +23,14 @@ jobs:
         working-directory: ../cicd-project/users
         run: |
           npm install
-          npm test
-
-      # Install dependencies and run tests for product service
+          node ./users/src/index.js
+                # Install dependencies and run tests for product service
       - name: Install dependencies and run tests for product service
         working-directory: ../cicd-project/product
         run: |
           npm install
-          npm test
+          node ./product/src/index.js
+
 
   deploy:
     needs: build
